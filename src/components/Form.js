@@ -17,7 +17,7 @@ const Form = () => {
 
         if (!name) error.push('Please enter your name')
         if (!email.includes('@')) error.push('Please provide a valid email')
-        if (!isNaN(phone)) error.push('Phone number should be properly formatted')
+        if (!phone) error.push('Phone number should be properly formatted')
         if (!phoneType) error.push('Please input a phone type')
         if (bio.length > 280) error.push('Bio cannot reach 280 characters')
 
@@ -26,6 +26,7 @@ const Form = () => {
     }, [name, email, phone, phoneType, bio])
 
     const onSubmit = e => {
+        console.log("test")
         e.preventDefault();
 
         setHasSubmitted(true);
@@ -37,6 +38,8 @@ const Form = () => {
             phone,
             phoneType,
             bio,
+            staff,
+            subscribe,
             submittedOn: new Date()
         }
 
@@ -46,6 +49,8 @@ const Form = () => {
         setPhone('');
         setPhoneType('');
         setBio('');
+        setStaff('')
+        setSubscribe('')
         setValidationErrors([]);
         setHasSubmitted(false);
     }
@@ -66,19 +71,19 @@ const Form = () => {
             <form onSubmit={onSubmit}>
                 <div>
                     <label>Name: </label>
-                    <input onChange={e => setName(e.target.value)}></input>
+                    <input value={name} onChange={e => setName(e.target.value)}></input>
                 </div>
                 <div>
-                    <label onChange={e => setEmail(e.target.value)}>Email: </label>
-                    <input ></input>
+                    <label>Email: </label>
+                    <input value={email} onChange={e => setEmail(e.target.value)}></input>
                 </div>
                 <div>
                     <label>Phone: </label>
-                    <input onChange={e => setPhone(e.target.value)}></input>
+                    <input value={phone} onChange={e => setPhone(e.target.value)}></input>
                 </div>
                 <div>
                     <label>PhoneType: </label>
-                    <select onChange={e => setPhoneType(e.target.value)}>
+                    <select value={phoneType} onChange={e => setPhoneType(e.target.value)}>
                         <option>Cell</option>
                         <option>Work</option>
                         <option>Home</option>
@@ -86,18 +91,18 @@ const Form = () => {
                 </div>
                 <div>
                     <label>Staff: </label>
-                    <input type="radio" onChange={e => setStaff(e.target.value)}></input>
+                    <input value={staff} type="radio" onChange={e => setStaff(e.target.value)}></input>
                 </div>
                 <div>
                     <label>Bio: </label>
-                    <textarea onChange={e => setBio(e.target.value)}></textarea>
+                    <textarea value={bio} onChange={e => setBio(e.target.value)}></textarea>
                 </div>
                 <div>
                     <label>Sign Up for email notifications: </label>
-                    <input type="checkBox" onChange={e => setSubscribe(e.target.value)}></input>
+                    <input value={subscribe} type="checkBox" onChange={e => setSubscribe(e.target.value)}></input>
                 </div>
-            </form>
             <button>Submit</button>
+            </form>
         </div>
     )
 }
